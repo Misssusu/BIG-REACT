@@ -8,6 +8,7 @@ const pkgPath = resolvePkgPath(name);
 const pkgDistPath = resolvePkgPath(name, true);
 
 export default [
+	// react
 	{
 		input: `${pkgPath}/${module}`,
 		output: {

@@ -59,4 +59,26 @@ export const jsx = (type: ElementType, config: any, ...maybeChildren: any) => {
 	return ReactElement(type, key, ref, props);
 };
 
-export const jsxDEV = jsx;
+export const jsxDEV = (type: ElementType, config: any) => {
+	let key: Key = undefined;
+	const props: Props = {};
+	let ref: Ref = undefined;
+
+	for (const prop in config) {
+		const val = config[prop];
+		if (prop === 'key' && val !== undefined) {
+			key = '' + val;
+			continue;
+		}
+		if (prop === 'ref' && val !== undefined) {
+			ref = '' + val;
+			continue;
+		}
+		if ({}.hasOwnProperty.call(config, prop)) {
+			//判断prop是不是config自带的属性即不是继承的
+			props[prop] = val;
+		}
+	}
+
+	return ReactElement(type, key, ref, props);
+};
